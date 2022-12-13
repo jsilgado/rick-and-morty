@@ -20,11 +20,11 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    this.personajesService.getAll()
-    .then(response => {
-      this.personajes = response['results'];
-      this.numPages = response['info'] ['pages'];
-    })
+
+    this.personajesService.getAll().subscribe(data => {
+      this.personajes = data['results'];
+      this.numPages = data['info'] ['pages'];
+    });
 
   }
 
@@ -34,8 +34,12 @@ export class AppComponent {
     } else {
       this.currentPage--;
     }
-    const response = await this.personajesService.getAll(this.currentPage);
-    this.personajes = response ['results'];
+
+    this.personajesService.getAll(this.currentPage).subscribe(data => {
+      this.personajes = data['results'];
+      this.numPages = data['info'] ['pages'];
+    });
+
   }
 
 }

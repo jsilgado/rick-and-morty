@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,10 +16,10 @@ export class PersonajesService {
 
   }
 
-  getAll(pPage = 1): Promise<any[]> {
-    console.log(pPage);
-    return this.http.get<any[]>(`${this.url}/character?page=${pPage}`).toPromise();
+  getAll(pPage = 1): Observable<any[]> {
+    return this.http.get<any[]>(`${this.url}/character?page=${pPage}`);
   }
+
 }
 
 
